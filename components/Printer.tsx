@@ -14,6 +14,17 @@ export const Printer: React.FC<PrinterProps> = ({ onPrint }) => {
   const [selectedColor, setSelectedColor] = useState<NoteData['color']>('yellow');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // Session Limit Configuration
+  const MAX_GENERATIONS = 3;
+  const [generationCount, setGenerationCount] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem('printify_gen_count');
+      return saved ? parseInt(saved, 10) : 0;
+    } catch {
+      return 0;
+    }
+  });
+
   const handlePrint = () => {
     if (!text.trim()) return;
     
@@ -39,10 +50,20 @@ export const Printer: React.FC<PrinterProps> = ({ onPrint }) => {
   };
 
   const handleGenerate = async () => {
+    if (generationCount >= MAX_GENERATIONS) return;
+
     setIsGenerating(true);
     const generated = await generateLoveNote(text);
     setText(generated);
     setIsGenerating(false);
+    
+    const newCount = generationCount + 1;
+    setGenerationCount(newCount);
+    try {
+      sessionStorage.setItem('printify_gen_count', newCount.toString());
+    } catch (e) {
+      // Ignore errors if storage is disabled
+    }
   };
 
   const colors: { id: NoteData['color'], class: string }[] = [
@@ -54,6 +75,8 @@ export const Printer: React.FC<PrinterProps> = ({ onPrint }) => {
     { id: 'purple', class: 'bg-purple-200 border-purple-300' },
     { id: 'orange', class: 'bg-orange-200 border-orange-300' },
   ];
+
+  const isLimitReached = generationCount >= MAX_GENERATIONS;
 
   return (
     <div className="relative w-[380px]">
@@ -113,20 +136,29 @@ export const Printer: React.FC<PrinterProps> = ({ onPrint }) => {
                  {/* Auto Button */}
                 <button 
                     onClick={handleGenerate}
-                    disabled={isGenerating}
-                    className="
+                    disabled={isGenerating || isLimitReached}
+                    title={isLimitReached ? "Session limit reached" : "Generate a note with AI"}
+                    className={`
                         px-4 py-2 rounded-full 
                         bg-white border border-slate-200
                         text-slate-600 text-sm font-semibold
-                        hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800
-                        active:scale-95
                         transition-all duration-200
                         flex items-center gap-1.5
                         shadow-sm
-                    "
+                        ${(isGenerating || isLimitReached)
+                            ? 'opacity-60 cursor-not-allowed'
+                            : 'hover:bg-slate-50 hover:border-slate-300 hover:text-slate-800 active:scale-95'}
+                    `}
                 >
-                    <Sparkles size={14} className={`text-purple-500 ${isGenerating ? 'animate-spin' : ''}`} />
-                    <span>Auto</span>
+                    <Sparkles size={14} className={`text-purple-500 ${isGenerating ? 'animate-spin' : ''} ${isLimitReached ? 'grayscale' : ''}`} />
+                    <span>
+                        {isLimitReached ? 'Limit' : 'Auto'}
+                    </span>
+                    {!isLimitReached && (
+                        <span className="bg-purple-100 text-purple-600 text-[10px] px-1.5 py-0.5 rounded-full ml-0.5">
+                            {MAX_GENERATIONS - generationCount}
+                        </span>
+                    )}
                 </button>
 
                 {/* Send Button */}
