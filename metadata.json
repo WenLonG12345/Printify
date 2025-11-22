@@ -1,0 +1,5 @@
+{
+  "name": "Printify",
+  "description": "A digital thermal printer for your whimsical thoughts. Type a message, print a receipt, and drag it anywhere to create a collage.",
+  "requestFramePermissions": []
+}
