@@ -5,85 +5,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Printify</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <!-- SEO / Social Meta -->
+  <meta name="description"
+    content="A digital thermal printer for your whimsical thoughts. Type a message, print a receipt, and drag it anywhere to create a collage." />
+  <meta name="application-name" content="Printify" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="/" />
+  <meta name="theme-color" content="#7c3aed" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Printify" />
+  <meta property="og:description"
+    content="A digital thermal printer for your whimsical thoughts. Type a message, print a receipt, and drag it anywhere to create a collage." />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="Printify — a digital thermal printer" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Printify" />
+  <meta name="twitter:description" content="A digital thermal printer for your whimsical thoughts." />
+  <meta name="twitter:image" content="/og.png" />
+  <meta name="twitter:image:alt" content="Printify — a digital thermal printer" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon-32.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon-16.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="msapplication-TileColor" content="#7c3aed" />
+  <meta name="msapplication-TileImage" content="/favicon-32.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="/src/main.css" rel="stylesheet">
+
   <style>
     /* Use @import for fonts to avoid CORS issues with html-to-image accessing cssRules */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Satisfy&display=swap');
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f3f4f6;
-      overflow: hidden;
-      /* Prevent scrolling from dragging notes off screen */
-    }
-
-    .font-receipt {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .font-hand {
-      font-family: 'Satisfy', cursive;
-    }
-
-    /* Custom scrollbar for the printer text area */
-    textarea::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    textarea::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    textarea::-webkit-scrollbar-thumb {
-      background-color: #e5e7eb;
-      border-radius: 20px;
-    }
-
-    .jagged-edge {
-      background:
-        linear-gradient(-45deg, transparent 6px, white 0) 0 100%,
-        linear-gradient(45deg, transparent 6px, white 0) 0 100%;
-      background-repeat: repeat-x;
-      background-size: 12px 12px;
-      height: 12px;
-      width: 100%;
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-    }
-
-    .jagged-edge-top {
-      background:
-        linear-gradient(-135deg, transparent 6px, white 0) 0 0,
-        linear-gradient(135deg, transparent 6px, white 0) 0 0;
-      background-repeat: repeat-x;
-      background-size: 12px 12px;
-      height: 12px;
-      width: 100%;
-      position: absolute;
-      top: -12px;
-      left: 0;
-    }
-
-    /* Printing Animation */
-    @keyframes print-slide-up {
-      0% {
-        transform: translateY(150px) scale(0.9);
-        opacity: 0;
-      }
-
-      100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-    }
-
-    .animate-print {
-      animation: print-slide-up 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
-    }
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Satisfy&display=swap");
   </style>
 </head>
 
