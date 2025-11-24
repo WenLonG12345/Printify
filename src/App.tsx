@@ -110,9 +110,12 @@ const App: React.FC = () => {
 				))}
 			</div>
 
-			{/* Footer / Input Device Container */}
-			<div className="mt-auto w-full z-40 pb-10 flex flex-col items-center justify-end pointer-events-none">
-				<div className="pointer-events-auto">
+			{/* Footer / Input Device Container - responsive and safe-area aware */}
+			<div
+				className="mt-auto w-full z-40 pb-6 sm:pb-10 flex flex-col items-center justify-end pointer-events-none"
+				// style={{ paddingBottom: "env(safe-area-inset-bottom, 1rem)" }}
+			>
+				<div className="pointer-events-auto w-full max-w-[680px] px-4 sm:px-6 flex justify-center">
 					<Printer onPrint={(text, color) => addNote(text, color)} />
 				</div>
 			</div>

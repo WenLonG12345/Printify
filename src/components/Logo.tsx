@@ -4,7 +4,7 @@ export const Logo: React.FC = () => {
 	return (
 		<div className="flex items-center justify-center gap-3 select-none">
 			{/* Icon */}
-			<div className="relative w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 ring-2 ring-white/50">
+			<div className="relative size-10 md:size-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg flex items-center justify-center transform -rotate-6 ring-2 ring-white/50">
 				<svg
 					className="w-7 h-7 text-white"
 					fill="none"
@@ -34,7 +34,7 @@ export const Logo: React.FC = () => {
 				</div>
 			</div>
 			{/* Text */}
-			<h1 className="text-5xl font-bold text-slate-800 font-hand tracking-tight drop-shadow-sm">
+			<h1 className="text-2xl md:text-5xl font-bold text-slate-800 font-hand tracking-tight drop-shadow-sm">
 				Printify
 			</h1>
 		</div>
